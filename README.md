@@ -3,7 +3,7 @@ A smart contract that allows for batching multiple queries.
 
 Running multiple queries in a short time frame can be a challenge, particularly if the API or web service you are using enforces strict rate limits. These rate limits are designed to prevent excessive requests that could potentially harm the service, such as overloading their servers or impacting their performance.
 
-A smart contract that batches queries for you can be an effective solution to this problem. Essentially, this smart contract acts as an intermediary between you and the API, receiving your individual queries, grouping them together into batches, and then sending them to the API as a single request.
+A smart contract that batches queries for you can be an effective solution to this problem. Essentially, this smart contract acts as an intermediary between you and the API, receiving your individual queries, grouping them together into batches, and then executing them as a single request.
 
 By batching your queries in this way, you can reduce the total number of requests sent to the API, which can help you stay within the rate limits and avoid being rate limited. Moreover, batching can also reduce the latency of the overall system, as sending fewer requests results in fewer round trips between the client and the server.
 
