@@ -1,0 +1,23 @@
+[package]
+name = "example"
+version = "0.1.0"
+edition = "2018"
+
+[[bin]]
+name = "test"
+path = "src/main.rs"
+
+[features]
+default = []
+
+[dependencies]
+dotenv = "0.15.0"
+derive_more = "0.99.17"
+tokio = { version = "1", features = ["macros"] }
+base64 = "0.21.0"
+secret-rpc = { git = "https://github.com/FloppyDisck/secret-rpc.git" }
+serde = "^1"
+serde_json = "^1"
+serde_derive = "^1"
+futures = "0.3.26"
+

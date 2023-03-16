@@ -1,0 +1,32 @@
+[env]
+BUILD_TARGET = "./contract/target/wasm32-unknown-unknown/release/"
+CURRENT_CRATE = "query_router_contract"
+COMPILED_DIR = "contract"
+
+[tasks.run]
+workspace = false
+command = "cargo"
+args = ["run", "--release", "--manifest-path", "./test/Cargo.toml"]
+
+[tasks.contract]
+workspace = false
+run_task = [{ name = ["build-contract", "compress-contract"] }]
+
+[tasks.build-contract]
+private = true
+workspace = false
+command = "cargo"
+args = [
+    "build", "--release", "--package", "query_router_contract", "--target",
+    "wasm32-unknown-unknown", "--manifest-path", "./contract/Cargo.toml"
+]
+
+[tasks.compress-contract]
+private = true
+workspace = false
+script = '''
+wasm-opt -Oz ${BUILD_TARGET}${CURRENT_CRATE}.wasm -o ./${CURRENT_CRATE}.wasm
+echo $(md5sum ${CURRENT_CRATE}.wasm | cut -f 1 -d " ") >> ${COMPILED_DIR}/${CURRENT_CRATE}.txt
+cat ./${CURRENT_CRATE}.wasm | gzip -n -9 > ${COMPILED_DIR}/${CURRENT_CRATE}.wasm.gz
+rm ./${CURRENT_CRATE}.wasm
+'''
